@@ -1,0 +1,121 @@
+.nav-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw 2vw;
+
+  background: rgba(0, 0, 0, 0.3); /* translucent black */
+  backdrop-filter: blur(8px);    /* smooth blur effect */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+}
+
+.nav-logo img {
+  height: 3vw;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4vw;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-size: 1vw;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4vw;
+  width: 0;
+  height: 2px;
+  background-color: rgb(253, 199, 0);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: rgb(253, 199, 0);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* HAMBURGER ICON */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open span {
+  background: rgb(253, 199, 0);
+}
+
+/* Hamburger to X transition */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive Styles */
+@media (max-width: 1240px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw 0;
+    background-color: rgba(13, 13, 13, 0.768);
+    gap: 3vw;
+    display: none;
+    /* border: 1px solid white; */
+    border-radius: 2vw;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 1.3rem;
+  }
+
+  .nav-logo img {
+    height: 6vw;
+  }
+}

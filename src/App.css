@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Ciguatera';
+  src: url('./assets/Fonts/ciguatera/Ciguatera.otf') format('truetype');
+}
+
+body {
+    background-color: rgb(13, 13, 13);
+    color: white;
+    font-family: 'Ciguatera', sans-serif;
+}
