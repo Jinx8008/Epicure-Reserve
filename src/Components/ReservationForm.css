@@ -78,6 +78,32 @@
   transform: translateY(-2px);
 }
 
+
+.Toastify__toast--success {
+  animation: popUp 0.5s ease forwards;
+}
+.Toastify__toast--error {
+  animation: shakeIt 0.5s ease forwards;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shakeIt {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+
 /* Tablet Screens (iPad Pro and down) */
 
 

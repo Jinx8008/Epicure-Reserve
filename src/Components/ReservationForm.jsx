@@ -3,20 +3,18 @@ import { bookReservation } from "./handleReservation";
 import "./ReservationForm.css";
 import { FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
 
-// ✅ Start the component
+// ✅ Toastify Imports
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ReservationForm = () => {
-  // 🔹 Track form input values
   const [formData, setFormData] = useState({
-    name: "Guest", // Optional default name
+    name: "Guest",
     date: "",
     time: "",
     people: "1"
   });
 
-  // 🔹 Track status message (e.g. success, error)
-  const [status, setStatus] = useState("");
-
-  // 🔹 Handle input updates
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,21 +22,36 @@ const ReservationForm = () => {
     });
   };
 
-  // 🔹 Submit the form and check availability
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Checking availability...");
+
+    // 🔄 Show loading toast and save its ID
+    const loadingId = toast.loading("Checking availability...");
 
     const result = await bookReservation(formData);
-    setStatus(result.message);
 
     if (result.success) {
-      // Reset form only if successful
+      // ✅ Update toast to success
+      toast.update(loadingId, {
+        render: "Reservation successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000
+      });
+
       setFormData({
         name: "Guest",
         date: "",
         time: "",
         people: "1"
+      });
+    } else {
+      // ❌ Update toast to error
+      toast.update(loadingId, {
+        render: result.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000
       });
     }
   };
@@ -49,9 +62,7 @@ const ReservationForm = () => {
         Our Chef Is Very Busy <br /> Book A Table
       </h2>
 
-      {/* ✅ Submit logic is connected here */}
       <form className="reservation-box" onSubmit={handleSubmit}>
-
         {/* 🔸 People Dropdown */}
         <div className="input-group">
           <FaUser className="icon" />
@@ -98,16 +109,33 @@ const ReservationForm = () => {
           />
         </div>
 
-        {/* 🔸 Status Feedback */}
-        <div className="midtext">
-          <p>{status}</p>
-        </div>
-
         {/* 🔸 Submit Button */}
         <button type="submit" className="book-btn">
           BOOK A TABLE
         </button>
       </form>
+
+      {/* ✅ Toastify Container */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        toastStyle={{
+          borderRadius: "12px",
+          background: "#1E1E1E",
+          color: "#FFD700",
+          boxShadow: "0 6px 20px rgba(253, 198, 0, 0.3)",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: "600",
+          fontSize: "1.1rem"
+        }}
+      />
     </section>
   );
 };
