@@ -12,7 +12,9 @@ function Navbar() {
   return (
     <nav className="nav-container">
       <div className="nav-logo">
-        <img src={logo} alt="Epicure Logo" />
+        <a href="/">
+          <img src={logo} alt="Epicure Logo" />
+        </a>
       </div>
 
       {/* Hamburger icon */}
