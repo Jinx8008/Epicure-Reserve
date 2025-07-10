@@ -119,3 +119,18 @@
     height: 6vw;
   }
 }
+.book-now-btn {
+  background-color: rgb(253, 199, 0);
+  color: white;
+  padding: 8px 16px;
+  margin-left: 10px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.book-now-btn:hover {
+  background-color: rgb(253, 199, 0);
+}
+
