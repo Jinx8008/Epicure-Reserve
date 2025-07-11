@@ -1,9 +1,31 @@
 
-.reservation-wrapper {
+.main-container{
+  border:  1px solid rgba(255, 217, 0, 0.222);
+  width: 80%;
   padding: 4vw 2vw;
+  border-radius: 2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("../assets/Images/_Pngtree_restaurant_menu_background_material_1033618-removebg-preview.png");
+}
+
+.reservation-wrapper {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3vw;
+}
+
+.reservation-wrapper::before {
+  content: "";
+  position: absolute;
+  opacity: 1;
+  /* inset: 0; */
+  /* background-color: rgba(0, 0, 0, 0.5); Change 0.5 to control opacity */
+  z-index: -1;
+  border-radius: 16px;
 }
 
 .reservation-title {
@@ -15,7 +37,7 @@
 }
 
 .reservation-box {
-  background-color: #1E1E1E;
+  background-color: #1e1e1ef9;
   padding: 2rem 3rem;
   border-radius: 1rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);

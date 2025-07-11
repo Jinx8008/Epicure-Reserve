@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { bookReservation } from "./handleReservation";
-import { auth } from "../config/firebase"; // ✅ import Firebase auth
+import { auth } from "../config/firebase"; // 
+import bgimg from "../assets/Images/_Pngtree_restaurant_menu_background_material_1033618-removebg-preview.png"
 import "./ReservationForm.css";
 import { FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
 
@@ -68,7 +69,8 @@ const ReservationForm = () => {
 
   return (
     <section className="reservation-wrapper">
-      <h2 className="reservation-title">
+      <div className="main-container">
+          <h2 className="reservation-title">
         Our Chef Is Very Busy <br /> Book A Table
       </h2>
 
@@ -146,6 +148,7 @@ const ReservationForm = () => {
           fontSize: "1.1rem"
         }}
       />
+      </div>
     </section>
   );
 };

@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import Carousel from "../Components/Carousel";
 import Stats from "../Components/Stats";
 import ReservationForm from "../Components/ReservationForm";
-import Menu from "../pages/Menu";
+import List from "../pages/List";
 
 const Home = () => {
   return (
@@ -11,11 +11,11 @@ const Home = () => {
       <Navbar />
       <Carousel />
         <Stats />
-   
-      
-      <ReservationForm />
+        <section id="reservation">
+          <ReservationForm />
+        </section>
 
-      <Menu/>
+      <List/>
       <h1>Hello World</h1>
     </>
   );
