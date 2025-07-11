@@ -1,0 +1,87 @@
+.signup-container {
+  max-width: 30vw;
+  margin: 5vw auto;
+  padding: 3vw;
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1vw;
+  box-shadow: 0 0 2vw rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+}
+
+.signup-container h2 {
+  font-size: 2vw;
+  margin-bottom: 2vw;
+  color: gold;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 1vw;
+  margin-bottom: 1.5vw;
+  border: none;
+  border-radius: 0.6vw;
+  font-size: 1vw;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.signup-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 1vw;
+  font-size: 1vw;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.6vw;
+  background-color: gold;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: rgb(253, 199, 0);
+}
+
+.feedback {
+  margin-top: 1vw;
+  font-size: 0.9vw;
+  color: white;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  width: 100%;
+  padding: 0.8vw;
+  padding-right: 3vw; /* space for the icon */
+  font-size: 1vw;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 1vw;
+  transform: translateY(-85%);
+  cursor: pointer;
+  font-size: 1.3vw;
+  color: #888;
+  user-select: none;
+  /* border: 1px solid white; */
+}
+
+
+
+

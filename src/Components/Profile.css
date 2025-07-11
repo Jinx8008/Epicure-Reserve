@@ -1,0 +1,105 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2vw;
+  background-color: #0e0e0e;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.profile-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1vw;
+  padding: 3vw;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 2vw rgba(255, 255, 255, 0.05);
+  text-align: center;
+  width: 90%;
+  max-width: 28vw;
+}
+
+.avatar {
+  margin: 0 auto 1.5vw;
+  width: 8vw;
+  height: 8vw;
+  background: gold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #1e1e1e;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.initials {
+  font-size: 3vw;
+}
+
+.email {
+  font-size: 1vw;
+  color: #aaa;
+  margin-bottom: 2vw;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.logout-btn,
+.delete-btn {
+  padding: 1vw;
+  font-size: 1vw;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-btn {
+  background-color: #ffd700;
+  color: #1e1e1e;
+}
+
+.logout-btn:hover {
+  background-color: #e6be00;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #e60000;
+}
+
+/* Fallback display when not logged in */
+.not-logged-in {
+  flex-direction: column;
+  text-align: center;
+}
+
+.not-logged-in span {
+  color: gold;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.not-logged-in span:hover {
+  text-decoration: underline;
+}

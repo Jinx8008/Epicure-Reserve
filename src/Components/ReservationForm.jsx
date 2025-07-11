@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { bookReservation } from "./handleReservation";
+import { auth } from "../config/firebase"; // ✅ import Firebase auth
 import "./ReservationForm.css";
 import { FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
 
@@ -10,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const ReservationForm = () => {
   const [formData, setFormData] = useState({
     name: "Guest",
+    email: "",
     date: "",
     time: "",
     people: "1"
@@ -25,13 +27,21 @@ const ReservationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 🔐 Get current user info
+    const user = auth.currentUser;
+    const name = user?.displayName || "Guest";
+    const email = user?.email || "";
+
     // 🔄 Show loading toast and save its ID
     const loadingId = toast.loading("Checking availability...");
 
-    const result = await bookReservation(formData);
+    const result = await bookReservation({
+      ...formData,
+      name,
+      email
+    });
 
     if (result.success) {
-      // ✅ Update toast to success
       toast.update(loadingId, {
         render: "Reservation successful!",
         type: "success",
@@ -41,14 +51,14 @@ const ReservationForm = () => {
 
       setFormData({
         name: "Guest",
+        email: "",
         date: "",
         time: "",
         people: "1"
       });
     } else {
-      // ❌ Update toast to error
       toast.update(loadingId, {
-        render: result.message,
+        render: `❌ ${result.message}`,
         type: "error",
         isLoading: false,
         autoClose: 3000
