@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   FaUtensils,
   FaCoffee,
@@ -99,6 +101,8 @@ const Menu = () => {
       ? allMenuItems
       : allMenuItems.filter((item) => item.category === activeCategory);
 
+      const navigate = useNavigate();
+
   return (
     <div className="bg-[#1e1e1e] text-white min-h-screen flex items-start justify-center px-4 py-16">
       <div className="w-full max-w-6xl">
@@ -169,8 +173,17 @@ const Menu = () => {
             </div>
           ))}
         </div>
+             <div className="text-end mt-8">
+  <button
+    onClick={() => navigate("/menu-list")}
+    className="bg-amber-500 text-black px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition"
+  >
+    View Full Menu List
+  </button>
+</div>
       </div>
-    </div>
+
+</div>
   );
 };
 
