@@ -10,7 +10,7 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="py-16 my-16 bg-black">
+    <section className="py-16 my-16" style={{ marginTop:"1vw"}}>
       <div className="max-w-full mx-auto px-4 flex flex-col sm:flex-row justify-between align-center text-center gap-y-8 sm:gap-y-0">
         {stats.map((stat, index) => (
           <div key={index} className="w-full sm:w-1/4 flex flex-col items-center">

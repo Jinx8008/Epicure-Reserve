@@ -130,7 +130,7 @@ const ReservationForm = () => {
           borderRadius: "12px",
           background: "#1E1E1E",
           color: "#FFD700",
-          boxShadow: "0 6px 20px rgba(253, 198, 0, 0.3)",
+          boxShadow: "0 6px 20px rgba(253, 198, 0, 0.12)",
           fontFamily: "Inter, sans-serif",
           fontWeight: "600",
           fontSize: "1.1rem"
