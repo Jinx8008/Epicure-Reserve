@@ -49,25 +49,16 @@ function Navbar() {
         </Link>
       </div>
 
-      {/* Hamburger */}
-      <div
-        className={`hamburger ${menuOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      {/* Links */}
+      <div className="nav-link-p-container">
+          {/* Links */}
       <div className={`nav-links ${menuOpen ? "active" : ""}`}>
         <Link to="/" onClick={closeMenu}>Home</Link>
         <Link to="/menu" onClick={closeMenu}>Menu</Link>
         <Link to="/gallery" onClick={closeMenu}>Gallery</Link>
         <Link to="/about" onClick={closeMenu}>About</Link>
         <Link to="/contact" onClick={closeMenu}>Contact</Link>
-
-        {/* Profile Icon */}
+      </div>
+       {/* Profile Icon */}
         <span className="profile-icon" onClick={handleProfileClick}>
           {user ? (
             user.photoURL ? (
@@ -81,9 +72,23 @@ function Navbar() {
             <FaUserCircle className="default-icon" />
           )}
         </span>
+        {/* Hamburger */}
+      <div
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+      </div>
+
+    
     </nav>
   );
 }
 
 export default Navbar;
+
+
+

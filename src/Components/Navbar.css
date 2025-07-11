@@ -137,13 +137,26 @@
   font-size: 2.5vw;
   color: gold;
 }
-
+.nav-link-p-container{
+  /* border: 1px solid white; */
+  display: flex;
+  gap: 5vw;
+}
 
 /* Responsive Styles */
 @media (max-width: 1240px) {
+
+  .default-icon {
+    font-size: 4vw;
+  }
   .hamburger {
     display: flex;
   }
+
+  .hamburger span {
+  height: 6px;
+  width: 30px;
+}
 
   .nav-links {
     position: absolute;
@@ -188,9 +201,19 @@
   background-color: rgb(253, 199, 0);
 } */
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
+  .profile-avatar,
+  .profile-initials {
+    width: 8vw;
+    height: 8vw;
+    font-size: 3.5vw;
+  }
+
+  .default-icon {
+    font-size: 7vw;
+  }
+
   .profile-icon {
-    margin-top: 2vw;
-    font-size: 5vw;
+    /* margin-top: 3vw; */
   }
 }
