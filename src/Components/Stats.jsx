@@ -15,7 +15,7 @@ const stats = [
 const Stats = () => {
   return (
     <section className="py-[5vw] my-[5vw]" style={{ marginTop: "1vw" }}>
-      <div className="max-w-full mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-center gap-y-[3vw] sm:gap-y-0">
+      <div className="max-w-full mx-auto px-4 flex flex-row sm:flex-row justify-between items-center text-center gap-y-[3vw] sm:gap-y-0 sm:text-3xl">
         {stats.map((stat, index) => (
           <div key={index} className="w-full sm:w-1/4 flex flex-col items-center">
             <img

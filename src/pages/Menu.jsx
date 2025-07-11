@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 
 import {
   FaUtensils,
@@ -12,12 +13,12 @@ import {
 
 // Categories
 const menuCategories = [
-  { label: "All", icon: <FaUtensils size={24} /> },
-  { label: "Breakfast", icon: <FaCoffee size={24} /> },
-  { label: "Lunch", icon: <FaHamburger size={24} /> },
-  { label: "Dinner", icon: <FaUtensils size={24} /> },
-  { label: "Dessert", icon: <FaIceCream size={24} /> },
-  { label: "Drink", icon: <FaCocktail size={24} /> },
+  { label: "All", icon: <FaUtensils size={30} /> },
+  { label: "Breakfast", icon: <FaCoffee size={30} /> },
+  { label: "Lunch", icon: <FaHamburger size={30} /> },
+  { label: "Dinner", icon: <FaUtensils size={30} /> },
+  { label: "Dessert", icon: <FaIceCream size={30} /> },
+  { label: "Drink", icon: <FaCocktail size={30} /> },
 ];
 
 // Sample menu items
@@ -105,6 +106,7 @@ const Menu = () => {
 
   return (
     <div className="bg-[#1e1e1e] text-white min-h-screen flex items-start justify-center px-4 py-16">
+      <Navbar/>
       <div className="w-full max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -131,7 +133,7 @@ const Menu = () => {
         </div>
 
         {/* Menu Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
           {filteredItems.map((item, index) => (
             <div
               key={index}
@@ -142,9 +144,17 @@ const Menu = () => {
                 alt={item.title}
                 className="w-40 h-40 object-cover"
               />
-              <div className="p-4 flex flex-col justify-between w-full">
+              <div className="p-4 flex flex-col justify-between gap-4 w-full">
                 <div>
-                  {/* Rating */}
+              
+
+                  <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
+
+                  <p className="text-sm text-gray-400 mb-4">
+                    {item.description}
+                  </p>
+                </div>
+                    {/* Rating */}
                   <div className="flex gap-1 text-yellow-400 mb-3 cursor-pointer">
                     {[...Array(5)].map((_, i) => (
                       <FaStar
@@ -159,13 +169,6 @@ const Menu = () => {
                     ))}
                   </div>
 
-                  <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
-
-                  <p className="text-sm text-gray-400 mb-4">
-                    {item.description}
-                  </p>
-                </div>
-
                 <p className="text-lg text-yellow-400 font-bold">
                   ${item.price.toFixed(2)}
                 </p>
@@ -173,9 +176,10 @@ const Menu = () => {
             </div>
           ))}
         </div>
-             <div className="text-end mt-8">
+        <br />
+             <div className="text-start mb-8">
   <button
-    onClick={() => navigate("/menu-list")}
+    onClick={() => navigate("/Menu")}
     className="bg-amber-500 text-black px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition"
   >
     View Full Menu List
