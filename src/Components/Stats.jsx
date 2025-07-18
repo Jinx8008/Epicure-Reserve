@@ -4,6 +4,7 @@ import Icon1 from '../assets/Images/icons8-profile-48.png';
 import Icon2 from '../assets/Images/icons8-clock-50.png';
 import Icon3 from '../assets/Images/icons8-globe-50.png';
 import Icon4 from '../assets/Images/icons8-suitcase-64.png';
+import './Stats.css';
 
 const stats = [
   { icon: Icon1, number: 1783, suffix: "+", label: "Happy Customers" },
@@ -14,21 +15,16 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="py-[5vw] my-[5vw]" style={{ marginTop: "1vw" }}>
-      <div className="max-w-full mx-auto px-4 flex flex-row sm:flex-row justify-between items-center text-center gap-y-[3vw] sm:gap-y-0 sm:text-3xl">
+    <section className="stats-section">
+      <div className="stats-grid">
         {stats.map((stat, index) => (
-          <div key={index} className="w-full sm:w-1/4 flex flex-col items-center">
-            <img
-              src={stat.icon}
-              alt={stat.label}
-              className="w-[2.2vw] h-[2.2vw] mb-[1vw]"
-              style={{ objectFit: "contain" }}
-            />
-            <h2 className="text-[1.6vw] font-bold text-white">
+          <div className="stat-card" key={index}>
+            <img src={stat.icon} alt={stat.label} className="stat-icon" />
+            <h2 className="stat-number">
               <CountUp end={stat.number} duration={2} />
               {stat.suffix}
             </h2>
-            <p className="text-[1vw] text-white mt-[0.5vw]">{stat.label}</p>
+            <p className="stat-label">{stat.label}</p>
           </div>
         ))}
       </div>

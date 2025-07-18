@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   FaUtensils,
   FaCoffee,
@@ -9,15 +8,16 @@ import {
   FaCocktail,
   FaStar,
 } from "react-icons/fa";
+import "./Menu.css";
 
 // Categories
 const menuCategories = [
-  { label: "All", icon: <FaUtensils size={30} /> },
-  { label: "Breakfast", icon: <FaCoffee size={30} /> },
-  { label: "Lunch", icon: <FaHamburger size={30} /> },
-  { label: "Dinner", icon: <FaUtensils size={30} /> },
-  { label: "Dessert", icon: <FaIceCream size={30} /> },
-  { label: "Drink", icon: <FaCocktail size={30} /> },
+  { label: "All", icon: <FaUtensils /> },
+  { label: "Breakfast", icon: <FaCoffee /> },
+  { label: "Lunch", icon: <FaHamburger /> },
+  { label: "Dinner", icon: <FaUtensils /> },
+  { label: "Dessert", icon: <FaIceCream /> },
+  { label: "Drink", icon: <FaCocktail /> },
 ];
 
 // Sample menu items
@@ -71,11 +71,11 @@ const allMenuItems = [
   },
 ];
 
-const Menu = () => {
+const List = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [ratings, setRatings] = useState({});
+  const navigate = useNavigate();
 
-  // Load ratings from localStorage on mount
   useEffect(() => {
     const storedRatings = localStorage.getItem("menuRatings");
     if (storedRatings) {
@@ -83,14 +83,11 @@ const Menu = () => {
     }
   }, []);
 
-  // Update localStorage when ratings change
   useEffect(() => {
     localStorage.setItem("menuRatings", JSON.stringify(ratings));
   }, [ratings]);
 
-  const handleCategoryClick = (category) => {
-    setActiveCategory(category);
-  };
+  const handleCategoryClick = (category) => setActiveCategory(category);
 
   const handleStarClick = (itemTitle, index) => {
     setRatings((prev) => ({ ...prev, [itemTitle]: index + 1 }));
@@ -101,92 +98,63 @@ const Menu = () => {
       ? allMenuItems
       : allMenuItems.filter((item) => item.category === activeCategory);
 
-      const navigate = useNavigate();
-
   return (
-    <div className="bg-[#1e1e1e] text-white min-h-screen flex items-start justify-center px-4 py-16">
-      <div className="w-full max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-sm text-yellow-400 tracking-widest mb-2">OUR MENU</p>
-          <h1 className="text-4xl font-bold leading-snug">Tasty Treats at a Good Price</h1>
+    <div className="menu-page">
+      <div className="menu-container">
+        <div className="menu-header">
+          <p>OUR MENU</p>
+          <h1>Tasty Treats at a Good Price</h1>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-5 mb-16">
+        <div className="menu-categories">
           {menuCategories.map((cat) => (
             <div
               key={cat.label}
               onClick={() => handleCategoryClick(cat.label)}
-              className={`flex flex-col items-center justify-center w-24 h-24 rounded cursor-pointer border transition-all duration-300 ${
-                activeCategory === cat.label
-                  ? "bg-yellow-400 text-black font-bold"
-                  : "border-gray-600 text-gray-300 hover:text-yellow-400 hover:border-yellow-400"
+              className={`menu-category ${
+                activeCategory === cat.label ? "active" : ""
               }`}
             >
-              {cat.icon}
-              <span className="mt-1 text-sm">{cat.label}</span>
+              <span className="icon">{cat.icon}</span>
+              <span>{cat.label}</span>
             </div>
           ))}
         </div>
 
-        {/* Menu Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
+        <div className="menu-items">
           {filteredItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex bg-[#2b2b2b] rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:ring-2 hover:ring-yellow-400"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-40 h-40 object-cover"
-              />
-              <div className="p-4 flex flex-col justify-between gap-4 w-full">
-                <div>
-              
-
-                  <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
-
-                  <p className="text-sm text-gray-400 mb-4">
-                    {item.description}
-                  </p>
+            <div className="menu-card" key={index}>
+              <img src={item.image} alt={item.title} />
+              <div className="menu-info">
+                <div className="rating">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar
+                      key={i}
+                      onClick={() => handleStarClick(item.title, i)}
+                      className={
+                        i < (ratings[item.title] || 0)
+                          ? "star active"
+                          : "star"
+                      }
+                    />
+                  ))}
                 </div>
-                    {/* Rating */}
-                  <div className="flex gap-1 text-yellow-400 mb-3 cursor-pointer">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar
-                        key={i}
-                        onClick={() => handleStarClick(item.title, i)}
-                        className={`transition-colors duration-200 ${
-                          i < (ratings[item.title] || 0)
-                            ? "text-yellow-400"
-                            : "text-gray-500"
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                <p className="text-lg text-yellow-400 font-bold">
-                  ${item.price.toFixed(2)}
-                </p>
+                <h2>{item.title}</h2>
+                <p className="description">{item.description}</p>
+                <p className="price">${item.price.toFixed(2)}</p>
               </div>
             </div>
           ))}
         </div>
-        <br />
-             <div className="text-start mb-8">
-  <button
-    onClick={() => navigate("/menu")}
-    className="bg-amber-500 text-black px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition"
-  >
-    View Full Menu List
-  </button>
-</div>
-      </div>
 
-</div>
+        <div className="view-more">
+          <button onClick={() => navigate("/menu")}>
+            View Full Menu List
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default Menu;
+export default List;

@@ -4,6 +4,8 @@ import Carousel from "../Components/Carousel";
 import Stats from "../Components/Stats";
 import ReservationForm from "../Components/ReservationForm";
 import List from "../pages/List";
+import Gallery from "../pages/Gallery";
+import Blog from "./Blog";
 
 const Home = () => {
   return (
@@ -11,11 +13,16 @@ const Home = () => {
       <Navbar />
       <Carousel />
         <Stats />
-   
-      
-      <ReservationForm />
+        <section id="reservation">
+          <ReservationForm />
+        </section>
 
       <List/>
+      <Gallery/>
+      <Blog />
+
+      {/* Hero Section */}
+      
       <h1>Hello World</h1>
     </>
   );

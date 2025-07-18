@@ -20,18 +20,27 @@ const HeroCarousel = () => {
     return () => clearInterval(slideInterval);
   }, []);
 
+  const scrollToReservation = () => {
+    const section = document.getElementById("reservation");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       className="hero-carousel"
       style={{ backgroundImage: `url(${images[currentIndex]})` }}
     >
-        <div className="overlay-container">
-            <div className="overlay">
-            <h1>Welcome to Epicure Reserve</h1>
-            <p>Book your table in seconds and indulge in luxury dining.</p>
-            <button className="cta-btn">Reserve Now</button>
+      <div className="overlay-container">
+        <div className="overlay">
+          <h1>Welcome to Epicure Reserve</h1>
+          <p>Book your table in seconds and indulge in luxury dining.</p>
+          <button className="cta-btn" onClick={scrollToReservation}>
+            Book A Reservation
+          </button>
         </div>
-        </div>
+      </div>
     </section>
   );
 };
