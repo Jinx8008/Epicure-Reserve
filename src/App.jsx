@@ -58,7 +58,7 @@ function App() {
             margin: 0,
             padding: 0,
           }}
-          icon={false}
+          icon={true}
         />
       </>
     </Router>

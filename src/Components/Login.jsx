@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("✅ Logged in successfully!");
+      toast.success("Logged in successfully!");
       navigate("/");
       setEmail("");
       setPassword("");

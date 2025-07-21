@@ -20,7 +20,7 @@ const SignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: fullName });
 
-      toast.success("✅ Account created successfully!");
+      toast.success("Account created successfully!");
       setFullName("");
       setEmail("");
       setPassword("");

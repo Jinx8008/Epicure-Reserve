@@ -7,12 +7,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAu0mlWyNvGOL-qsJU42szQxH4WuqjbiOo",
-  authDomain: "epicure-reserve.firebaseapp.com",
-  projectId: "epicure-reserve",
-  storageBucket: "epicure-reserve.firebasestorage.app",
-  messagingSenderId: "610256752127",
-  appId: "1:610256752127:web:3f94b596aab48d641b2bca"
+  apiKey: "AIzaSyBNTSO4ne2Sz2yIg37VKitQJNGP3pMeZYw",
+  authDomain: "epicure-reserve-958b0.firebaseapp.com",
+  projectId: "epicure-reserve-958b0",
+  storageBucket: "epicure-reserve-958b0.firebasestorage.app",
+  messagingSenderId: "786952364644",
+  appId: "1:786952364644:web:faca5c34c3efe137723571",
+  measurementId: "G-JJF1E62DSN"
 };
 
 // Initialize Firebase
