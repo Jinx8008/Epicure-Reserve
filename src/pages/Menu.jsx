@@ -1,132 +1,180 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import {
   FaUtensils,
-  FaCoffee,
   FaHamburger,
   FaIceCream,
   FaCocktail,
   FaStar,
+  FaSearch,
 } from "react-icons/fa";
 import "./Menu.css";
 
-// Categories
+/* ------------------  CATEGORIES ------------------ */
 const menuCategories = [
-  { label: "All", icon: <FaUtensils /> },
-  { label: "Breakfast", icon: <FaCoffee /> },
-  { label: "Lunch", icon: <FaHamburger /> },
-  { label: "Dinner", icon: <FaUtensils /> },
-  { label: "Dessert", icon: <FaIceCream /> },
-  { label: "Drink", icon: <FaCocktail /> },
+  { label: "All",           icon: <FaUtensils /> },
+  { label: "Appetizers",    icon: <FaUtensils /> },
+  { label: "Main Courses",  icon: <FaHamburger /> },
+  { label: "Desserts",      icon: <FaIceCream /> },
+  { label: "Kids Menu",     icon: <FaUtensils /> },
+  { label: "Drinks",        icon: <FaCocktail /> },
 ];
 
-// Sample menu items
+/* ------------------  MENU DATA ------------------ */
 const allMenuItems = [
+  /* Appetizers */
   {
-    title: "Chicken Biryani",
-    category: "Lunch",
-    description: "Spicy Indian rice dish with chicken.",
-    price: 35,
-    image:
-      "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe.jpg",
+    title: "Crispy Calamari",
+    category: "Appetizers",
+    description: "Tender calamari with a zesty marinara sauce.",
+    price: 9,
+    image: "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/216812.jpg",
   },
   {
-    title: "Antipasto Salad",
-    category: "Dinner",
-    description: "Fresh vegetables, meats, and cheese salad.",
-    price: 18,
-    image:
-      "https://hostthetoast.com/wp-content/uploads/2018/08/antipasto-pasta-salad-5-320x320-1.jpg",
+    title: "Lobster Bisque",
+    category: "Appetizers",
+    description: "Creamy lobster soup with a hint of sherry.",
+    price: 14,
+    image: "https://www.seriouseats.com/thmb/2Ukl3a4cFZjOAWa4B6aV2HXrAEE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20211202-LobsterBisque-AmandaSuarez-hero-2-2c1b5a7e35d94b2e9222586dd1c4fd2f.jpg",
+  },
+
+  /* Main Courses */
+  {
+    title: "Grilled Salmon",
+    category: "Main Courses",
+    description: "Freshly grilled salmon with lemon‑dill sauce.",
+    price: 22,
+    image: "https://www.thespruceeats.com/thmb/4_2U_6BR8h5mN8lD-NhsDN0v2tc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/grilled-salmon-3059432-hero-01-f0a40813b74742ff911a8d4d5974d496.jpg",
   },
   {
-    title: "Finger Chicken",
-    category: "Breakfast",
-    description: "Crispy fried chicken fingers with dip.",
-    price: 12,
-    image: "https://i.ytimg.com/vi/3hwbUW9DfCI/maxresdefault.jpg",
+    title: "Filet Mignon",
+    category: "Main Courses",
+    description: "Prime cut filet mignon with red‑wine reduction.",
+    price: 32,
+    image: "https://www.simplyrecipes.com/thmb/9M-mMuD0u29j8Bu6BW4TOr9n5tc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Filet-Mignon-LEAD-02-2c24462d7e5c421e944e479c553574c6.jpg",
+  },
+
+  /* Desserts */
+  {
+    title: "Chocolate Lava Cake",
+    category: "Desserts",
+    description: "Warm chocolate cake with a molten center.",
+    price: 10,
+    image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/easy-chocolate-molten-cakes-37a25eb.jpg",
   },
   {
-    title: "Chocolate Cake",
-    category: "Dessert",
-    description: "Delicious chocolate cake with cream.",
-    price: 8,
-    image:
-      "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/easy-chocolate-molten-cakes-37a25eb.jpg",
+    title: "Key Lime Pie",
+    category: "Desserts",
+    description: "Classic key lime pie with a graham‑cracker crust.",
+    price: 7,
+    image: "https://www.simplyrecipes.com/thmb/nzkqN7xBAyT1yAZD0K5uQ4ZIKzU=/2000x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Key-Lime-Pie-LEAD-05-c0d3bc94db804df89ac76904d2c13a0b.jpg",
   },
+
+  /* Kids Menu */
+  {
+    title: "Chicken Tenders",
+    category: "Kids Menu",
+    description: "Golden crispy chicken tenders with fries.",
+    price: 6,
+    image: "https://www.culinaryhill.com/wp-content/uploads/2022/01/Chicken-Tenders-Culinary-Hill-1200x800-1.jpg",
+  },
+  {
+    title: "Mac & Cheese",
+    category: "Kids Menu",
+    description: "Creamy mac and cheese, kid‑approved!",
+    price: 5,
+    image: "https://www.spendwithpennies.com/wp-content/uploads/2021/10/SpendWithPennies-Easy-Mac-and-Cheese-SpendWithPennies-20.jpg",
+  },
+
+  /* Drinks */
   {
     title: "Lemonade",
-    category: "Drink",
+    category: "Drinks",
     description: "Refreshing lemonade with mint.",
-    price: 5,
-    image:
-      "https://www.tastingtable.com/img/gallery/20-underrated-drinks-you-should-be-ordering-at-a-bar/intro-1695390668.jpg",
+    price: 4,
+    image: "https://www.acouplecooks.com/wp-content/uploads/2020/07/Mint-Lemonade-006.jpg",
   },
   {
-    title: "Pigeon Burger",
-    category: "Lunch",
-    description: "Unique burger with tender pigeon meat.",
-    price: 13,
-    image:
-      "https://www.mypigeonforge.com/wp-content/uploads/2024/07/Cookie-Dough-Monster-burgers.jpg",
+    title: "Chocolate Milkshake",
+    category: "Drinks",
+    description: "Rich chocolate milkshake with whipped cream.",
+    price: 5,
+    image: "https://static01.nyt.com/images/2020/07/06/dining/03milkshakerex1/03milkshakerex1-threeByTwoMediumAt2X.jpg",
   },
 ];
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [ratings, setRatings] = useState({});
-  const navigate = useNavigate();
 
+  /* -------- Persist ★ ratings locally -------- */
   useEffect(() => {
-    const storedRatings = localStorage.getItem("menuRatings");
-    if (storedRatings) {
-      setRatings(JSON.parse(storedRatings));
-    }
+    const stored = localStorage.getItem("menuRatings");
+    if (stored) setRatings(JSON.parse(stored));
   }, []);
-
   useEffect(() => {
     localStorage.setItem("menuRatings", JSON.stringify(ratings));
   }, [ratings]);
 
-  const handleCategoryClick = (category) => setActiveCategory(category);
-
-  const handleStarClick = (itemTitle, index) => {
-    setRatings((prev) => ({ ...prev, [itemTitle]: index + 1 }));
-  };
-
-  const filteredItems =
+  /* -------- Filtering -------- */
+  const byCategory =
     activeCategory === "All"
       ? allMenuItems
-      : allMenuItems.filter((item) => item.category === activeCategory);
+      : allMenuItems.filter((i) => i.category === activeCategory);
+
+  const filteredItems = byCategory.filter(
+    (i) =>
+      i.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      i.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  /* -------- Handlers -------- */
+  const handleStarClick = (title, idx) =>
+    setRatings((prev) => ({ ...prev, [title]: idx + 1 }));
 
   return (
     <div className="menu-page">
-      <Navbar/>
-      <div className="menu-container">
-        <div className="menu-header">
-          <p>OUR MENU</p>
-          <h1>Tasty Treats at a Ggit brancood Price</h1>
+      <Navbar />
+      <section className="menu-container">
+        {/* ---------- Header ---------- */}
+        <header className="menu-header">
+          <p className="sub-title">OUR MENU</p>
+          <h1>Tasty Treats at a Good Price</h1>
+        </header>
+
+        {/* ---------- Search ---------- */}
+        <div className="search-bar">
+          <FaSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search menu items"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
 
+        {/* ---------- Category Chips ---------- */}
         <div className="menu-categories">
-          {menuCategories.map((cat) => (
-            <div
-              key={cat.label}
-              onClick={() => handleCategoryClick(cat.label)}
+          {menuCategories.map(({ label, icon }) => (
+            <button
+              key={label}
+              onClick={() => setActiveCategory(label)}
               className={`menu-category ${
-                activeCategory === cat.label ? "active" : ""
+                activeCategory === label ? "active" : ""
               }`}
             >
-              <span className="icon">{cat.icon}</span>
-              <span>{cat.label}</span>
-            </div>
+              <span className="icon">{icon}</span>
+              {label}
+            </button>
           ))}
         </div>
 
+        {/* ---------- Menu Grid ---------- */}
         <div className="menu-items">
-          {filteredItems.map((item, index) => (
-            <div className="menu-card" key={index}>
-              <img src={item.image} alt={item.title} />
+          {filteredItems.map((item) => (
+            <article className="menu-card" key={item.title}>
+              <img src={item.image} alt={item.title} loading="lazy" />
               <div className="menu-info">
                 <div className="rating">
                   {[...Array(5)].map((_, i) => (
@@ -134,27 +182,22 @@ const Menu = () => {
                       key={i}
                       onClick={() => handleStarClick(item.title, i)}
                       className={
-                        i < (ratings[item.title] || 0)
-                          ? "star active"
-                          : "star"
+                        i < (ratings[item.title] || 0) ? "star active" : "star"
                       }
                     />
                   ))}
                 </div>
-                <h2>{item.title}</h2>
+                <h2 className="dish">{item.title}</h2>
                 <p className="description">{item.description}</p>
                 <p className="price">${item.price.toFixed(2)}</p>
               </div>
-            </div>
+            </article>
           ))}
+          {filteredItems.length === 0 && (
+            <p className="no-results">No items match your search.</p>
+          )}
         </div>
-
-        {/* <div className="view-more">
-          <button onClick={() => navigate("/menu")}>
-            View Full Menu List
-          </button>
-        </div> */}
-      </div>
+      </section>
     </div>
   );
 };
