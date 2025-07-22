@@ -94,7 +94,7 @@ const Blog = () => {
             <div key={index} className="flex justify-center px-2 box-border" id="slides">
   <div
     onClick={() => setSelectedPost(post)}
-    className="bg-neutral-900 border border-yellow-500 w-full sm:w-[90%] md:w-[85%] lg:w-[80%] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
+    className="bg-neutral-900 w-full sm:w-[90%] md:w-[85%] lg:w-[80%] rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
   >
     <img
       src={post.image}
@@ -113,30 +113,7 @@ const Blog = () => {
     </div>
   </div>
 </div>
-
-        //   <div key={index} className="px-4 box-border" id="slides">
-        //     <div
-        //       onClick={() => setSelectedPost(post)}
-        //       className="bg-neutral-900 h-full w-100 border-r border-l border-yellow-600 rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
-        //     >
-        //       <img
-        //         src={post.image}
-        //         alt={post.title}
-        //         className="w-full h-48 object-cover"
-        //       />
-        //       <div className="px-6 py-8 text-white">
-        //         <div className="flex items-center justify-between text-xs mb-2">
-        //           <span className="text-yellow-600 uppercase">{post.tag}</span>
-        //           <span className="text-gray-300 font-extrabold">{post.date}</span>
-        //         </div>
-        //         <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-        //         <p className="text-gray-400 line-clamp-4">
-        //           {post.description.slice(0, 120)}...
-        //         </p>
-        //       </div>
-        //     </div>
-        //   </div>
-        ))}
+  ))}
       </Slider>
 
       {/* Modal */}
@@ -148,7 +125,7 @@ const Blog = () => {
           >
             <button
               onClick={() => setSelectedPost(null)}
-              className="absolute top-2 right-4 text-yellow-400 text-2xl font-bold"
+              className="absolute top-2 right-4 text-amber-400 text-2xl font-bold"
             >
               ×
             </button>

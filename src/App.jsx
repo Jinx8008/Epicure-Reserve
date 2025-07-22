@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import Profile from "./Components/Profile"
+import EpicureGallery from "./Pages/EpicureGallery";
 import ProtectedRoute from "./Components/ProtectedRoute";
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+           <Route path="/gallery" element={<EpicureGallery />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
