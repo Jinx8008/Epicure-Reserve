@@ -2,7 +2,7 @@
 .menu-page {
   width: 100%;
   min-height: 100vh;
-  background: #1b1616;
+  /* background: #1b1616; */
 }
 
 .menu-container {
@@ -106,7 +106,7 @@
 
 /* ---------- Card ---------- */
 .menu-card {
-  background: #0f0f08;
+  background: black;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
@@ -162,7 +162,7 @@
   margin-top: 8px;
   font-weight: 600;
   color: #e0b806;
-  border: 1px solid #e0b806;
+  /* border: 1px solid #e0b806; */
   width: 50px;
   border-radius: 15%;
 }
