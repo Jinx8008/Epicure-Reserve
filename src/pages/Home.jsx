@@ -4,7 +4,7 @@ import Carousel from "../Components/Carousel";
 import Stats from "../Components/Stats";
 import ReservationForm from "../Components/ReservationForm";
 import List from "../pages/List";
-import Gallery from "../pages/Gallery";
+import Gallery from "../Components/Gallery";
 import Blog from "./Blog";
 
 const Home = () => {

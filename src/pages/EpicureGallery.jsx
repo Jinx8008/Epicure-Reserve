@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCommentDots, FaTrash, FaSave } from "react-icons/fa";
+import Navbar from "../Components/Navbar";
 
 const tabs = ["Regular", "VIP"];
 
@@ -63,7 +64,7 @@ const vipGallery = [
   },
 ];
 
-const Gallery = () => {
+const EpicureGallery = () => {
   const [activeTab, setActiveTab] = useState("VIP");
   const [heroData, setHeroData] = useState(vipGallery[0]);
   const [comments, setComments] = useState(() => {
@@ -106,8 +107,16 @@ const Gallery = () => {
   };
 
   return (
+
+    <>
+    <Navbar/>
     <div className={`min-h-screen px-6 py-10 ${isVIP ? "bg-transparent text-white" : "bg-black text-white"}`}>
-      <h2 className="text-lg font-semibold mb-6 text-center">Gallery</h2> <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    
+      <h2 className="font-bold text-4xl text-amber-400 mb-6 text-center">Gallery</h2> <br />
 
       <div className="flex flex-col md:flex-row gap-6 mb-10 items-start">
         <div className="flex-1 overflow-hidden rounded-xl">
@@ -120,7 +129,7 @@ const Gallery = () => {
         <div className="md:w-1/2 flex flex-col gap-2">
           <h3 className="text-xl font-semibold">{heroData.title}</h3>
           <p className="text-sm opacity-80">{heroData.description}</p>
-          <span className={`inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full ${heroData.tag === "VIP" ? "bg-black w-30 text-white" : "bg-black w-30 text-white"}`}>
+          <span className={`inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full ${heroData.tag === "VIP" ? "bg-transparent w-30 text-amber-400" : "w-30 text-amber-400"}`}>
             {heroData.tag}
           </span>
           <div className="mt-4">
@@ -203,7 +212,8 @@ const Gallery = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
-export default Gallery;
+export default EpicureGallery;
