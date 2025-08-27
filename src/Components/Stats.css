@@ -1,69 +1,70 @@
 .stats-section {
-  padding: 5vw 2vw;
-  /* background-color: #1e1e1e; */
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 per row by default */
-  gap: 2.5rem;
-  justify-items: center;
-  align-items: center;
-  text-align: center;
-}
-
-.stat-card {
+  padding: 6vh 5vw;
   background: transparent;
-  padding: 1rem 1.2rem;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+  /* border: 1px solid red; */
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+.stats-grid { 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  /* border: 1px solid purple; */
+  width: 100%;
+  max-width: 1540px;
+}
+
+.stat-card {
+  background: transparent;
+  padding: 1.5rem 1.2rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 150px;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+}
+
 .stat-card:hover {
   transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 217, 0, 0.354);
 }
 
 .stat-icon {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   margin-bottom: 0.8rem;
 }
 
 .stat-number {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 700;
   color: #FFD700;
   line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   color: white;
   margin-top: 0.3rem;
 }
 
-/* For large screens (≥1024px): 4 items per row */
-@media (min-width: 1024px) {
-  .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .stat-icon {
-    width: 3vw;
-    height: 3vw;
-    margin-bottom: 1rem;
-  }
-
-  .stat-number {
-    font-size: 1.8vw;
-  }
-
-  .stat-label {
-    font-size: 1vw;
-  }
+/* Optional: subtle border or separator */
+.stat-card::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  margin-top: 0.8rem;
+  background: #ffd70044;
+  border-radius: 999px;
 }

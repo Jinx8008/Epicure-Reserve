@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import CountUp from "react-countup";
 import Icon1 from '../assets/Images/icons8-profile-48.png';
 import Icon2 from '../assets/Images/icons8-clock-50.png';

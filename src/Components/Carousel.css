@@ -6,50 +6,64 @@
   position: relative;
   transition: background-image 1s ease-in-out;
   z-index: 1;
+  /* border: 1px solid purple; */
+  box-sizing: border-box;
+  /* max-width: 2000px; */
 }
 
+/* Dark overlay */
 .hero-carousel::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
+}
+
+/* NEW: Center container */
+.carousel-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 
 .overlay-container {
   display: flex;
-  align-items: center;     
-  justify-content: center;    
+  align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
   position: relative;
-  z-index: 2;
 }
 
 .overlay {
   text-align: center;
   color: white;
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
   padding-bottom: 5vh;
 }
 
-
 .overlay h1 {
-  font-size: 4vw;
+  font-size: clamp(2rem, 4vw, 4rem); /* Responsive */
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 .overlay p {
-  font-size: 1.5vw;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   margin-bottom: 2rem;
 }
 
 .cta-btn {
   background-color: rgba(255, 217, 0, 0.692);
   color: #1E1E1E;
-  padding: 1vw;
+  padding: 0.8rem 1.6rem;
   border: none;
   border-radius: 30px;
   font-weight: 700;
@@ -62,30 +76,10 @@
   background-color: rgb(253, 199, 0);
 }
 
-/* Responsive */
 /* Tablet */
 @media (max-width: 1240px) {
-  .overlay-container {
-    align-items: center;
-    padding: 0 5vw;
-    text-align: center;
-  }
-
   .overlay {
     padding-bottom: 0;
-  }
-
-  .overlay h1 {
-    font-size: 10vw;
-  }
-
-  .overlay p {
-    font-size: 2.5vw;
-  }
-
-  .cta-btn {
-    padding: 1vw 2vw;
-    font-size: 2vw;
   }
 
   .hero-carousel {
@@ -93,27 +87,18 @@
   }
 }
 
-
 /* Mobile */
 @media (max-width: 480px) {
-  .overlay h1 {
-    font-size: 8vw;
-  }
-
-  .overlay p {
-    font-size: 3.5vw;
+  .overlay {
+    padding-bottom: 3vh;
   }
 
   .cta-btn {
     padding: 0.5rem 1.2rem;
-    font-size: 3vw;
+    font-size: 0.9rem;
   }
 
   .hero-carousel {
     height: 65vh;
-  }
-
-  .overlay {
-    padding-bottom: 3vh;
   }
 }

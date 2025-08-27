@@ -41,54 +41,51 @@ function Navbar() {
   };
 
   return (
-    <nav className="nav-container">
-      {/* Logo */}
-      <div className="nav-logo">
-        <Link to="/">
-          <img src={logo} alt="Epicure Logo" />
-        </Link>
-      </div>
+    <div className="navbar-section-wrapper">
+      <div className="navbar-section-inner">
+        <nav className="nav-container">
+          <div className="nav-logo">
+            <Link to="/">
+              <img src={logo} alt="Epicure Logo" />
+            </Link>
+          </div>
 
-      <div className="nav-link-p-container">
-          {/* Links */}
-      <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-        <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/menu" onClick={closeMenu}>Menu</Link>
-        <Link to="/gallery" onClick={closeMenu}>Gallery</Link>
-        <Link to="/about" onClick={closeMenu}>About</Link>
-        <Link to="/contact" onClick={closeMenu}>Contact</Link>
-      </div>
-       {/* Profile Icon */}
-        <span className="profile-icon" onClick={handleProfileClick}>
-          {user ? (
-            user.photoURL ? (
-              <img src={user.photoURL} alt="Profile" className="profile-avatar" />
-            ) : (
-              <div className="profile-initials">
-                {getInitials(user.displayName || "U")}
-              </div>
-            )
-          ) : (
-            <FaUserCircle className="default-icon" />
-          )}
-        </span>
-        {/* Hamburger */}
-      <div
-        className={`hamburger ${menuOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      </div>
+          <div className="nav-link-p-container">
+            <div className={`nav-links ${menuOpen ? "active" : ""}`}>
+              <Link to="/" onClick={closeMenu}>Home</Link>
+              <Link to="/menu" onClick={closeMenu}>Menu</Link>
+              <Link to="/gallery" onClick={closeMenu}>Gallery</Link>
+              <Link to="/about" onClick={closeMenu}>About</Link>
+              <Link to="/contact" onClick={closeMenu}>Contact</Link>
+            </div>
 
-    
-    </nav>
+            <span className="profile-icon" onClick={handleProfileClick}>
+              {user ? (
+                user.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="profile-avatar" />
+                ) : (
+                  <div className="profile-initials">
+                    {getInitials(user.displayName || "U")}
+                  </div>
+                )
+              ) : (
+                <FaUserCircle className="default-icon" />
+              )}
+            </span>
+
+            <div
+              className={`hamburger ${menuOpen ? "open" : ""}`}
+              onClick={toggleMenu}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
   );
 }
 
 export default Navbar;
-
-
-

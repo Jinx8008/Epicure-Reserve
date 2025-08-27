@@ -1,41 +1,54 @@
-.nav-container {
+.navbar-section-wrapper {
+  width: 100%;
+  /* border: 1px solid green; */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 99;
 
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-section-inner {
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  /* padding: 0 1.5rem; */
+  box-sizing: border-box;
+  /* border: 1px solid purple; */
+}
+
+.nav-container {
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1vw 2vw;
-
-  background: rgba(0, 0, 0, 0.3); /* translucent black */
-  backdrop-filter: blur(8px);    /* smooth blur effect */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   
+  /* border: 1px solid red; */
+
+  padding: 1rem 1.5rem;
 }
 
 .nav-logo img {
-  height: 3vw;
+  height: clamp(30px, 3.5vw, 60px);
 }
 
 .nav-links {
   display: flex;
-  gap: 4vw;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid white; */
 }
 
 .nav-links a {
   position: relative;
   text-decoration: none;
   color: white;
-  font-size: 1vw;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
   transition: color 0.3s ease;
-  /* border: 1px solid white; */
-  height: fit-content;
 }
 
 .nav-links a::after {
@@ -57,7 +70,12 @@
   width: 100%;
 }
 
-/* HAMBURGER ICON */
+.nav-link-p-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -78,7 +96,6 @@
   background: rgb(253, 199, 0);
 }
 
-/* Hamburger to X transition */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -90,12 +107,15 @@
 .hamburger.open span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
+
 .profile-icon {
-  font-size: 1.6vw;
-  margin-left: 2vw;
+  font-size: 1.5rem;
+  margin-left: 1rem;
   cursor: pointer;
-  color: gold;
+  display: flex;
+  align-items: center;
   transition: transform 0.2s;
+  color: gold;
 }
 
 .profile-icon:hover {
@@ -103,60 +123,36 @@
   color: #ffd700;
 }
 
-.profile-icon {
-  margin-left: 1vw;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  /* border: 1px solid white; */
-}
-
-.profile-avatar {
-  width: 2.5vw;
-  height: 2.5vw;
+.profile-avatar,
+.profile-initials {
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid gold;
 }
 
 .profile-initials {
-  width: 2.5vw;
-  height: 2.5vw;
   background-color: gold;
   color: #1e1e1e;
-  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 1.1vw;
-  font-family: "Inter", sans-serif;
 }
 
 .default-icon {
-  font-size: 2.5vw;
+  font-size: 2rem;
   color: gold;
-}
-.nav-link-p-container{
-  /* border: 1px solid white; */
-  display: flex;
-  gap: 5vw;
 }
 
 /* Responsive Styles */
 @media (max-width: 1240px) {
-
-  .default-icon {
-    font-size: 4vw;
-  }
   .hamburger {
     display: flex;
   }
-
-  .hamburger span {
-  height: 6px;
-  width: 30px;
-}
 
   .nav-links {
     position: absolute;
@@ -165,12 +161,11 @@
     right: 0;
     flex-direction: column;
     align-items: center;
-    padding: 2vw 0;
-    background-color: rgba(13, 13, 13, 0.768);
-    gap: 3vw;
+    padding: 2rem 0;
+    background-color: rgba(13, 13, 13, 0.9);
+    border-radius: 0.5rem;
     display: none;
-    /* border: 1px solid white; */
-    border-radius: 2vw;
+    gap: 1.5rem;
   }
 
   .nav-links.active {
@@ -182,38 +177,17 @@
   }
 
   .nav-logo img {
-    height: 6vw;
+    height: 3rem;
   }
-}
-.book-now-btn {
-  background-color: transparent;
-  color: white;
-  padding: 8px 16px;
-  margin-left: 10px;
-  border: 2px solid rgb(253, 199, 0);
-  border-radius: 5px;
-  text-align: center;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
-}
 
-/* .book-now-btn:hover {
-  background-color: rgb(253, 199, 0);
-} */
-
-@media (max-width: 768px) {
   .profile-avatar,
   .profile-initials {
-    width: 8vw;
-    height: 8vw;
-    font-size: 3.5vw;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
   }
 
   .default-icon {
-    font-size: 7vw;
-  }
-
-  .profile-icon {
-    /* margin-top: 3vw; */
+    font-size: 2.5rem;
   }
 }

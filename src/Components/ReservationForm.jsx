@@ -68,8 +68,10 @@ const ReservationForm = () => {
   };
 
   return (
+    
     <section className="reservation-wrapper" id="reservation-form">
-      <div className="main-container">
+      <div className="section-inner">
+        <div className="form-main-container">
           <h2 className="reservation-title">
         Our Chef Is Very Busy <br /> Book A Table
       </h2>
@@ -149,6 +151,8 @@ const ReservationForm = () => {
         }}
       />
       </div>
+      </div>
+      
     </section>
   );
 };

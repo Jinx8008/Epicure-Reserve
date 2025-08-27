@@ -6,24 +6,22 @@ import ReservationForm from "../Components/ReservationForm";
 import List from "../pages/List";
 import Gallery from "../Components/Gallery";
 import Blog from "./Blog";
+import './Home.css';
 
 const Home = () => {
   return (
     <>
+    
       <Navbar />
-      <Carousel />
+        <Carousel />
         <Stats />
         <section id="reservation">
           <ReservationForm />
         </section>
-
-      <List/>
-      <Gallery/>
-      <Blog />
-
-      {/* Hero Section */}
-      
-      <h1>Hello World</h1>
+        <List />
+        <Gallery />
+        <Blog />
+        <h1>Hello World</h1>
     </>
   );
 };

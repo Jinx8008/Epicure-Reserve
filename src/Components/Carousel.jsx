@@ -15,7 +15,7 @@ const HeroCarousel = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change slide every 5s
+    }, 5000);
 
     return () => clearInterval(slideInterval);
   }, []);
@@ -32,13 +32,15 @@ const HeroCarousel = () => {
       className="hero-carousel"
       style={{ backgroundImage: `url(${images[currentIndex]})` }}
     >
-      <div className="overlay-container">
-        <div className="overlay">
-          <h1>Welcome to Epicure Reserve</h1>
-          <p>Book your table in seconds and indulge in luxury dining.</p>
-          <button className="cta-btn" onClick={scrollToReservation}>
-            Book A Reservation
-          </button>
+      <div className="carousel-inner">
+        <div className="overlay-container">
+          <div className="overlay">
+            <h1>Welcome to Epicure Reserve</h1>
+            <p>Book your table in seconds and indulge in luxury dining.</p>
+            <button className="cta-btn" onClick={scrollToReservation}>
+              Book A Reservation
+            </button>
+          </div>
         </div>
       </div>
     </section>

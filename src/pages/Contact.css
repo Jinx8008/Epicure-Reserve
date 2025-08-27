@@ -1,160 +1,104 @@
 .contact-section {
-  padding: 2rem;
   background: #101010;
   color: #fff;
-  height: fit-content;
+  min-height: 100vh;
+  padding: clamp(16px, 2vw, 32px);
 }
 
+/* Header */
 .contact-header {
   text-align: center;
-  margin-top: 4vw;
+  margin-top: clamp(16px, 4vw, 48px);
 }
 
 .contact-header h2 {
-  font-size: 3vw;
+  font-size: clamp(20px, 3vw, 42px); /* scales like vw but bounded */
   color: #ffd700;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  margin-bottom: clamp(8px, 1vw, 14px);
+  font-weight: 700;
 }
 
 .contact-header p {
-  font-size: 1.5vw;
+  font-size: clamp(14px, 1.2vw, 18px);
   color: #cccccc;
-  max-width: 600px;
+  max-width: 60ch;
   margin: 0 auto;
   line-height: 1.6;
 }
 
+/* Form wrapper */
 .form-parent-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 4vw;
-  padding: 1rem;
+  margin-top: clamp(20px, 4vw, 56px);
+  padding: clamp(8px, 1vw, 16px);
 }
 
 .form-container {
-  border: 1px solid rgba(255, 217, 0, 0.527);
-  width: 70%;
-  padding: 3vw;
-  border-radius: 1.5vw;
+  border: 1px solid rgba(255, 217, 0, 0.53);
+  width: clamp(300px, 70%, 900px); /* scales but never too tiny/huge */
+  padding: clamp(16px, 3vw, 40px);
+  border-radius: clamp(10px, 1.5vw, 20px);
   background-image: url("../assets/Images/_Pngtree_restaurant_menu_background_material_1033618-removebg-preview.png");
-  /* background-size: cover;
-  background-position: center; */
+  background-size: cover;     /* fills nicely */
+  background-position: center;
+  background-repeat: no-repeat;
   backdrop-filter: blur(4px);
 }
 
+/* Form */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: clamp(12px, 1.2vw, 20px);
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 0.8rem;
+  width: 100%;
+  padding: clamp(12px, 1.2vw, 18px) clamp(14px, 1.4vw, 22px);
   border-radius: 6px;
   border: none;
   background-color: #222;
   color: #fff;
-  height: 5vw;
-  font-size: 1.4vw;
+  font-size: clamp(14px, 1.2vw, 18px); /* scales smoothly */
+  line-height: 1.4;
+  box-sizing: border-box;
 }
 
+/* No fixed heights – let padding+font-size define height */
 .contact-form textarea {
-  height: 12vw;
+  min-height: clamp(120px, 12vw, 220px);
   resize: none;
 }
 
 .contact-form button {
-  padding: 0.8rem;
-  background: rgba(253, 198, 0, 0.628);
+  padding: clamp(12px, 1.2vw, 18px);
+  background: rgba(253, 198, 0, 0.7);
   color: #000;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  height: 5vw;
-  font-size: 1.5vw;
-  transition: background 0.3s ease;
+  font-size: clamp(14px, 1.3vw, 18px);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .contact-form button:hover {
   background: rgb(253, 198, 0);
+  transform: translateY(-2px);
 }
 
-/* ===================== RESPONSIVENESS ===================== */
-
-@media screen and (max-width: 1024px) {
- .contact-section {
-  height: 100vh;
-}
-  .form-container {
-    width: 85%;
-    padding: 4vw;
-  }
-
-  .contact-header h2 {
-    font-size: 5vw;
-  }
-
-  .contact-header p {
-    font-size: 2vw;
-  }
-
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form button {
-    font-size: 2vw;
-    height: auto;
-  }
-}
-
-@media screen and (max-width: 768px) {
+/* Optional small tweaks at breakpoints (not required for scaling) */
+@media (max-width: 768px) {
   .form-container {
     width: 95%;
-    padding: 5vw;
-  }
-
-  .contact-header h2 {
-    font-size: 6vw;
-  }
-
-  .contact-header p {
-    font-size: 2.5vw;
-  }
-
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form button {
-    font-size: 2.5vw;
-  }
-
-  .contact-form textarea {
-    height: 20vw;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .form-container {
-    padding: 6vw 5vw;
-  }
-
-  .contact-header h2 {
-    font-size: 7vw;
-  }
-
+@media (max-width: 480px) {
   .contact-header p {
-    font-size: 3vw;
-  }
-
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form button {
-    font-size: 3.5vw;
-  }
-
-  .contact-form textarea {
-    height: 25vw;
+    max-width: 90%;
   }
 }
