@@ -1,27 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import Carousel from "../Components/Carousel";
 import Stats from "../Components/Stats";
 import ReservationForm from "../Components/ReservationForm";
-import List from "../pages/List";
-import Gallery from "../Components/Gallery";
+import MenuPreview from "../pages/MenuPreview";
+import Gallery from "../Components/MiniGallery";
 import Blog from "./Blog";
+import CommentsDisplay from "../Components/CommentsDisplay";
+import Footer from "../Components/Footer";
 import './Home.css';
 
 const Home = () => {
+  // 🔹 State to hold latest comment
+  const [newComment, setNewComment] = useState(null);
+
   return (
     <>
-    
       <Navbar />
-        <Carousel />
-        <Stats />
-        <section id="reservation">
-          <ReservationForm />
-        </section>
-        <List />
-        <Gallery />
-        <Blog />
-        <h1>Hello World</h1>
+      <Carousel />
+      <Stats />
+      <section id="reservation">
+        <ReservationForm />
+      </section>
+      <MenuPreview />
+      <Gallery />
+      <Blog />
+
+      {/* 🔹 Pass newComment into CommentsDisplay */}
+      <CommentsDisplay newComment={newComment} />
+
+      {/* 🔹 Footer sends back new comments */}
+      <Footer onNewComment={setNewComment} />
     </>
   );
 };

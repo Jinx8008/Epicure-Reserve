@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { supabase } from "../config/supabaseClient";
 import { toast } from "react-toastify";
 import logo from "../assets/Images/Epicure-R-bgr-img.png";
 import "../Components/Navbar.css";
@@ -10,16 +9,39 @@ import { FaUserCircle } from "react-icons/fa";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    // Get current user on component mount
+    const getCurrentUser = async () => {
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) {
+          console.error("Error getting user:", error);
+        } else {
+          setUser(user);
+        }
+      } catch (error) {
+        console.error("Error in getCurrentUser:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getCurrentUser();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("Auth state changed in navbar:", event, session?.user);
+      setUser(session?.user || null);
+      setLoading(false);
     });
-    return () => unsubscribe();
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleProfileClick = () => {
@@ -33,11 +55,20 @@ function Navbar() {
   };
 
   const getInitials = (name) => {
+    if (!name) return "U";
     return name
-      ?.split(" ")
+      .split(" ")
       .map((n) => n[0])
       .join("")
       .toUpperCase();
+  };
+
+  const getUserDisplayName = (user) => {
+    return user?.user_metadata?.full_name || user?.email?.split('@')[0] || "User";
+  };
+
+  const getUserAvatar = (user) => {
+    return user?.user_metadata?.avatar_url;
   };
 
   return (
@@ -60,12 +91,20 @@ function Navbar() {
             </div>
 
             <span className="profile-icon" onClick={handleProfileClick}>
-              {user ? (
-                user.photoURL ? (
-                  <img src={user.photoURL} alt="Profile" className="profile-avatar" />
+              {loading ? (
+                <div className="profile-loading">
+                  <div className="mini-spinner"></div>
+                </div>
+              ) : user ? (
+                getUserAvatar(user) ? (
+                  <img 
+                    src={getUserAvatar(user)} 
+                    alt="Profile" 
+                    className="profile-avatar" 
+                  />
                 ) : (
                   <div className="profile-initials">
-                    {getInitials(user.displayName || "U")}
+                    {getInitials(getUserDisplayName(user))}
                   </div>
                 )
               ) : (

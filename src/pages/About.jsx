@@ -6,11 +6,13 @@ import CvIcon2 from "../assets/Images/icons8-trust-24.png"
 import CvIcon3 from "../assets/Images/icons8-infinity-30.png"
 import CvIcon4 from "../assets/Images/icons8-vip-30.png"
 import "./About.css";
+import Footer from "../Components/Footer";
 
 const About = () => {
   return (
-    <section className="about" id="about">
+   <>
       <Navbar/>
+    <section className="about" id="about">
       <div className="about-container">
         <div className="about-text">
           <h2>Welcome to Epicure Reserve</h2>
@@ -76,15 +78,10 @@ const About = () => {
            </div>
 
         </div>
-
-        <div className="about-image">
-          {/* Placeholder for Gallery */}
-          <div className="about-gallery-placeholder">
-            <p>[Gallery Section Here]</p>
-          </div>
-        </div>
       </div>
     </section>
+    <Footer/>
+   </>
   );
 };
 

@@ -9,7 +9,7 @@ import Contact from "./pages/Contact";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import Profile from "./Components/Profile"
-import EpicureGallery from "./Pages/EpicureGallery";
+import EpicureGallery from "./pages/Gallery";
 import ProtectedRoute from "./Components/ProtectedRoute";
 function App() {
   return (
