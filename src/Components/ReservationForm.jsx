@@ -3,11 +3,46 @@ import { bookReservation } from "./handleReservation";
 import { supabase } from "../config/supabaseClient";
 import bgimg from "../assets/Images/_Pngtree_restaurant_menu_background_material_1033618-removebg-preview.png";
 import "./ReservationForm.css";
-import { FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
+import { FaUser, FaCalendarAlt, FaClock, FaTimes, FaCheck, FaExclamationTriangle } from "react-icons/fa";
 
-// ✅ Toastify Imports
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// Custom Toast Component
+const CustomToast = ({ message, type, isVisible, onClose }) => {
+  if (!isVisible) return null;
+
+  const getIcon = () => {
+    switch (type) {
+      case 'success': return <FaCheck />;
+      case 'error': return <FaExclamationTriangle />;
+      case 'loading': return <div className="spinner"></div>;
+      default: return null;
+    }
+  };
+
+  const getToastClass = () => {
+    switch (type) {
+      case 'success': return 'toast-success';
+      case 'error': return 'toast-error';
+      case 'loading': return 'toast-loading';
+      default: return '';
+    }
+  };
+
+  return (
+    <div className={`custom-toast ${getToastClass()}`}>
+      <div className="toast-content">
+        <div className="toast-icon">
+          {getIcon()}
+        </div>
+        <span className="toast-message">{message}</span>
+        {type !== 'loading' && (
+          <button className="toast-close" onClick={onClose}>
+            <FaTimes />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const ReservationForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +54,29 @@ const ReservationForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Custom toast state
+  const [toast, setToast] = useState({
+    isVisible: false,
+    message: '',
+    type: 'success'
+  });
+
+  // Show toast function
+  const showToast = (message, type = 'success', duration = 3000) => {
+    setToast({ isVisible: true, message, type });
+    
+    if (type !== 'loading') {
+      setTimeout(() => {
+        setToast(prev => ({ ...prev, isVisible: false }));
+      }, duration);
+    }
+  };
+
+  // Close toast function
+  const closeToast = () => {
+    setToast(prev => ({ ...prev, isVisible: false }));
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -37,13 +95,13 @@ const ReservationForm = () => {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      toast.error("❌ You must be logged in to make a reservation.");
+      showToast("❌ You must be logged in to make a reservation.", 'error');
       setIsSubmitting(false);
       return;
     }
 
     // 🔄 Show loading toast
-    const loadingId = toast.loading("Checking availability...");
+    showToast("Checking availability...", 'loading');
 
     // ✅ Prepare reservation data aligned with DB
     const result = await bookReservation({
@@ -58,12 +116,7 @@ const ReservationForm = () => {
     });
 
     if (result.success) {
-      toast.update(loadingId, {
-        render: "✅ Reservation Successful!",
-        type: "success",
-        isLoading: false,
-        autoClose: 3000,
-      });
+      showToast("✅ Reservation Successful!", 'success', 4000);
 
       setFormData({
         name: "Guest",
@@ -73,12 +126,7 @@ const ReservationForm = () => {
         people: "1",
       });
     } else {
-      toast.update(loadingId, {
-        render: `❌ ${result.message}`,
-        type: "error",
-        isLoading: false,
-        autoClose: 3000,
-      });
+      showToast(`❌ ${result.message}`, 'error', 5000);
     }
     
     setIsSubmitting(false);
@@ -160,17 +208,12 @@ const ReservationForm = () => {
             </button>
           </form>
 
-          {/* ✅ Toastify Container */}
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={true}
-            newestOnTop
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
+          {/* Custom Toast Notification */}
+          <CustomToast
+            message={toast.message}
+            type={toast.type}
+            isVisible={toast.isVisible}
+            onClose={closeToast}
           />
         </div>
       </div>

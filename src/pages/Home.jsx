@@ -26,10 +26,8 @@ const Home = () => {
       <Gallery />
       <Blog />
 
-      {/* 🔹 Pass newComment into CommentsDisplay */}
       <CommentsDisplay newComment={newComment} />
 
-      {/* 🔹 Footer sends back new comments */}
       <Footer onNewComment={setNewComment} />
     </>
   );

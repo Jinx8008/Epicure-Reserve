@@ -451,3 +451,255 @@
     padding: 1.1rem 1.5rem;
   }
 }
+
+/* Custom Toast Styles - Matching Your Reservation Form Design */
+
+.custom-toast {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  min-width: 350px;
+  max-width: 500px;
+  border-radius: 15px;
+  /* Enhanced glassmorphism matching your design */
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(253, 199, 0, 0.3);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  animation: slideInToast 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Golden top border like your form */
+.custom-toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgb(253, 199, 0) 50%, transparent 100%);
+  z-index: 1;
+}
+
+/* Inner glow effect like your form */
+.custom-toast::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, rgba(253, 199, 0, 0.05) 0%, transparent 50%, rgba(253, 199, 0, 0.05) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  padding: 1.4rem 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.toast-icon {
+  margin-right: 15px;
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.toast-message {
+  flex: 1;
+  text-align: center;
+  color: #FFD700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.toast-close:hover {
+  background: rgba(253, 199, 0, 0.2);
+  color: rgb(253, 199, 0);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(253, 199, 0, 0.2);
+}
+
+/* Toast Types with your color scheme */
+.toast-success {
+  border-left: 4px solid #22c55e;
+}
+
+.toast-success .toast-icon {
+  color: #22c55e;
+}
+
+.toast-success .toast-message {
+  color: #FFD700;
+}
+
+.toast-error {
+  border-left: 4px solid #ef4444;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+.toast-error .toast-message {
+  color: #FFD700;
+}
+
+.toast-loading {
+  border-left: 4px solid rgb(253, 199, 0);
+}
+
+.toast-loading .toast-icon {
+  color: rgb(253, 199, 0);
+}
+
+.toast-loading .toast-message {
+  color: #FFD700;
+}
+
+/* Enhanced spinner matching your button spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(253, 199, 0, 0.3);
+  border-top: 2.5px solid rgb(253, 199, 0);
+  border-radius: 50%;
+  animation: spinToast 1s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(253, 199, 0, 0.3));
+}
+
+@keyframes spinToast {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced slide-in animation */
+@keyframes slideInToast {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+/* Success animation - bouncy like your design */
+.toast-success {
+  animation: popUpSuccess 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popUpSuccess {
+  from {
+    transform: translate(-50%, -20px) scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Error animation - shake effect */
+.toast-error {
+  animation: shakeError 0.6s ease;
+}
+
+@keyframes shakeError {
+  0%, 100% { 
+    transform: translate(-50%, 0); 
+  }
+  10%, 30%, 50%, 70%, 90% { 
+    transform: translate(-50%, 0) translateX(-8px); 
+  }
+  20%, 40%, 60%, 80% { 
+    transform: translate(-50%, 0) translateX(8px); 
+  }
+}
+
+/* Responsive design matching your breakpoints */
+@media (max-width: 768px) {
+  .custom-toast {
+    min-width: 300px;
+    max-width: 90vw;
+    top: 1.5rem;
+  }
+  
+  .toast-content {
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .toast-icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+  }
+  
+  .toast-close {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    margin-left: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-toast {
+    min-width: 280px;
+    top: 1rem;
+  }
+  
+  .toast-content {
+    padding: 1rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .toast-icon {
+    margin-right: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .toast-message {
+    letter-spacing: 0.3px;
+  }
+  
+  .toast-close {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+    margin-left: 10px;
+  }
+  
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+  }
+}

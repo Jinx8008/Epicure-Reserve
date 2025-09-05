@@ -38,14 +38,16 @@ function App() {
         <ToastContainer
           position="top-center"
           autoClose={3000}
-          hideProgressBar
+          hideProgressBar={false} // Show progress bar so users can see countdown
           newestOnTop
           closeOnClick
+          rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover
           theme="dark"
           limit={3}
+          closeButton={true} // Explicitly enable close button
           toastStyle={{
             borderRadius: "12px",
             background: "#1E1E1E",

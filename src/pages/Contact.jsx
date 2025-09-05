@@ -1,20 +1,83 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "../Components/Navbar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./Contact.css";
 import Footer from "../Components/Footer";
-import { FaUser, FaEnvelope, FaCommentDots, FaPaperPlane } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaCommentDots, FaPaperPlane, FaTimes, FaCheck, FaExclamationTriangle } from "react-icons/fa";
+
+// Custom Toast Component
+const CustomToast = ({ message, type, isVisible, onClose }) => {
+  if (!isVisible) return null;
+
+  const getIcon = () => {
+    switch (type) {
+      case 'success': return <FaCheck />;
+      case 'error': return <FaExclamationTriangle />;
+      case 'loading': return <div className="spinner"></div>;
+      default: return null;
+    }
+  };
+
+  const getToastClass = () => {
+    switch (type) {
+      case 'success': return 'toast-success';
+      case 'error': return 'toast-error';
+      case 'loading': return 'toast-loading';
+      default: return '';
+    }
+  };
+
+  return (
+    <div className={`custom-toast ${getToastClass()}`}>
+      <div className="toast-content">
+        <div className="toast-icon">
+          {getIcon()}
+        </div>
+        <span className="toast-message">{message}</span>
+        {type !== 'loading' && (
+          <button className="toast-close" onClick={onClose}>
+            <FaTimes />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const Contact = () => {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
   const [formTouched, setFormTouched] = useState(false);
+  
+  // Custom toast state
+  const [toast, setToast] = useState({
+    isVisible: false,
+    message: '',
+    type: 'success'
+  });
+
+  // Show toast function
+  const showToast = (message, type = 'success', duration = 4000) => {
+    setToast({ isVisible: true, message, type });
+    
+    if (type !== 'loading') {
+      setTimeout(() => {
+        setToast(prev => ({ ...prev, isVisible: false }));
+      }, duration);
+    }
+  };
+
+  // Close toast function
+  const closeToast = () => {
+    setToast(prev => ({ ...prev, isVisible: false }));
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
+
+    // Show loading toast
+    showToast("Sending your message...", 'loading');
 
     emailjs
       .sendForm(
@@ -25,13 +88,13 @@ const Contact = () => {
       )
       .then(
         () => {
-          toast.success("✅ Message sent successfully!");
+          showToast("✅ Message sent successfully!", 'success', 5000);
           form.current.reset();
           setFormTouched(false);
           window.scrollTo({ top: 0, behavior: "smooth" });
         },
         () => {
-          toast.error("❌ Failed to send message. Try again later.");
+          showToast("❌ Failed to send message. Try again later.", 'error', 6000);
         }
       )
       .finally(() => {
@@ -157,21 +220,16 @@ const Contact = () => {
               <span className="contact-link">epicurereserve@restaurant.com</span>
             </p>
           </div>
+
+          {/* Custom Toast Notification */}
+          <CustomToast
+            message={toast.message}
+            type={toast.type}
+            isVisible={toast.isVisible}
+            onClose={closeToast}
+          />
         </div>
       </div>
-
-      {/* Enhanced Toast Container */}
-      <ToastContainer
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={true}
-        newestOnTop
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
     <Footer />
     </>

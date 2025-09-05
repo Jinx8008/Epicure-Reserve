@@ -21,6 +21,7 @@
   max-width: 500px;
   position: relative;
   overflow: hidden;
+  margin-top: 60px;
 }
 
 .profile-card::before {
@@ -562,3 +563,4 @@ details pre {
     font-size: 9px;
   }
 }
+
