@@ -3,22 +3,27 @@ import { supabase } from "../config/supabaseClient";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import "./Login.css";
+import Navbar from "../Components/Navbar";
+import "./SignUp.css";
 
-const Login = () => {
+const SignUp = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: { full_name: fullName },
+        },
       });
 
       if (error) {
@@ -26,19 +31,21 @@ const Login = () => {
         return;
       }
 
-      toast.success("✅ Logged in successfully!");
+      toast.success("✅ Account created! Check your email for verification.");
+      setFullName("");
       setEmail("");
       setPassword("");
-      navigate("/");
+
+      navigate("/"); 
     } catch (error) {
-      toast.error("❌ Login failed. Try again.");
-      console.error("Login error:", error.message);
+      toast.error("❌ Something went wrong. Try again.");
+      console.error("Signup error:", error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleSignup = async () => {
     const redirectTo = "https://epicure-reserve.netlify.app"; // updated redirect
     try {
       const { error } = await supabase.auth.signInWithOAuth({
@@ -48,27 +55,41 @@ const Login = () => {
 
       if (error) throw error;
     } catch (error) {
-      console.error("Google login error:", error.message);
-      toast.error("❌ Google login failed. Try again.");
+      console.error("Google signup error:", error.message);
+      toast.error("❌ Google signup failed. Try again.");
     }
   };
 
   const getErrorMessage = (message) => {
-    if (message.includes("Invalid login credentials")) return "Incorrect email or password.";
-    if (message.includes("Email not confirmed")) return "Please verify your email before logging in.";
-    return "Login failed. Try again.";
+    if (message.includes("already registered")) return "Email is already registered.";
+    if (message.includes("Invalid login credentials")) return "Enter a valid email.";
+    if (message.includes("Password should be at least")) return "Password should be at least 6 characters.";
+    return "Something went wrong. Try again.";
   };
 
   return (
+    <>
+    <Navbar />
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-icon">🔐</div>
-          <h2>Welcome Back</h2>
-          <p>Sign in to your account to continue</p>
+          <div className="auth-icon">👤</div>
+          <h2>Create Your Account</h2>
+          <p>Join us to start your culinary journey</p>
         </div>
 
-        <form onSubmit={handleLogin} className="auth-form">
+        <form onSubmit={handleSignUp} className="auth-form">
+          <div className="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="form-group">
             <label>Email Address</label>
             <input
@@ -85,7 +106,7 @@ const Login = () => {
             <div className="password-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder="Create a password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="password-input"
@@ -104,10 +125,10 @@ const Login = () => {
             {loading ? (
               <>
                 <div className="btn-spinner"></div>
-                Signing in...
+                Creating account...
               </>
             ) : (
-              "Sign In"
+              "Create Account"
             )}
           </button>
         </form>
@@ -116,26 +137,27 @@ const Login = () => {
           <span>or</span>
         </div>
 
-        <button className="auth-btn google" onClick={handleGoogleLogin}>
+        <button className="auth-btn google" onClick={handleGoogleSignup}>
           <img
             src="https://developers.google.com/identity/images/g-logo.png"
             alt="Google"
             className="google-icon"
           />
-          Sign in with Google
+          Sign up with Google
         </button>
 
         <div className="auth-footer">
           <p>
-            Don't have an account?{" "}
-            <Link to="/signup" className="auth-link">
-              Sign up here
+            Already have an account?{" "}
+            <Link to="/login" className="auth-link">
+              Log in here
             </Link>
           </p>
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default Login;
+export default SignUp;

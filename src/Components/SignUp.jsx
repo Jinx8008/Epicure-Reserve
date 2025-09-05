@@ -3,6 +3,7 @@ import { supabase } from "../config/supabaseClient";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../Components/Navbar";
 import "./SignUp.css";
 
 const SignUp = () => {
@@ -67,6 +68,8 @@ const SignUp = () => {
   };
 
   return (
+  <>
+    <Navbar />    
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
@@ -153,6 +156,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 
