@@ -39,12 +39,11 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
+    const redirectTo = "https://epicure-reserve.netlify.app"; // updated redirect
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: {
-          redirectTo: "https://epicure-reserve.netlify.app",
-        },
+        options: { redirectTo },
       });
 
       if (error) throw error;
